@@ -1,5 +1,6 @@
 package pl.sda;
 
 public interface TranslationUtil {
-    String translate(String textToTranslate);
+    String encode(String textToEncode);
+    String decode(String textToDecode);
 }

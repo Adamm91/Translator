@@ -4,25 +4,22 @@ package pl.sda;
 public class App 
 {
     public static void main( String[] args ) {
-
-//        String filePath = "C:\\Users\\adamm\\Desktop\\tekst.txt";
-//
-//        TranslatorFileReader reader = new TranslatorFileReader();
-//        String fileContents = reader.read(filePath);
-//
-//        String encodedText = MorseUtil.encodeMorse(fileContents);
-//        System.out.println(encodedText);
-
         String filePath = "C:\\Users\\adamm\\Desktop\\tekst.txt";
+        TranslationType type = TranslationType.MORSE;
 
-        TranslatorFileReader translatorFileReader = new TranslatorFileReader();
-        NatoUtil natoUtil = new NatoUtil();
+        if (args != null && args.length > 0) {
+            filePath = args[0];
+            type = TranslationType.valueOf(args[1]);
+        }
 
-        TranslationUtil translationUtil;
+        TranslatorFileReader reader = new TranslatorFileReader();
+        String fileContents = reader.read(filePath);
 
-        String fileContents = translatorFileReader.read(filePath);
-        String encodedText = natoUtil.encode(fileContents);
+        TranslationUtil translationUtil = TranslationUtilFactory.produce(type);
+
+        String encodedText = translationUtil.encode(fileContents);
         System.out.println(encodedText);
+
     }
 
 
